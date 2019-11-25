@@ -21,34 +21,6 @@ class MainView : View("Beaver Dam Model") {
     }
 }
 
-class TopView: View() {
-    override val root = hbox {
-        menubar {
-            menu("File") {
-                menu("Connect") {
-                    item("Facebook")
-                    item("Twitter")
-                }
-                item("Save")
-                item("Quit")
-            }
-            menu("Edit") {
-                item("Copy")
-                item("Paste")
-            }
-            menu("Build") {
-                item("Climate Controls")
-                item("Storage")
-                item("Conduits")
-            }
-            menu("Model") {
-                item("Options")
-            }
-
-        }
-    }
-}
-
 class LeftView: View() {
     override  val root  = label("Left")
 }
