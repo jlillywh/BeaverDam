@@ -5,7 +5,7 @@ import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import tornadofx.*
 
-class MainView : View("Hello TornadoFX") {
+class MainView : View("Beaver Dam Model") {
     val topView: TopView by inject()
     val leftView: LeftView by inject()
     val centerView: CenterView by inject()
@@ -22,9 +22,29 @@ class MainView : View("Hello TornadoFX") {
 }
 
 class TopView: View() {
-    override val root = label("Top View") {
-        label("Reservoir Model") {
-            addClass(Styles.heading)
+    override val root = hbox {
+        menubar {
+            menu("File") {
+                menu("Connect") {
+                    item("Facebook")
+                    item("Twitter")
+                }
+                item("Save")
+                item("Quit")
+            }
+            menu("Edit") {
+                item("Copy")
+                item("Paste")
+            }
+            menu("Build") {
+                item("Climate Controls")
+                item("Storage")
+                item("Conduits")
+            }
+            menu("Model") {
+                item("Options")
+            }
+
         }
     }
 }
@@ -34,7 +54,11 @@ class LeftView: View() {
 }
 
 class CenterView: View() {
-    override  val root  = label("Center")
+    override  val root  = label("Center") {
+        label("Reservoir Model") {
+            addClass(Styles.heading)
+        }
+    }
 }
 
 class RightView: View() {
