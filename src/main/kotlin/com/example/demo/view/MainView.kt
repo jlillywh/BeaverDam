@@ -54,9 +54,17 @@ class LeftView: View() {
 }
 
 class CenterView: View() {
-    override  val root  = label("Center") {
+    override  val root  = vbox(1) {
         label("Reservoir Model") {
             addClass(Styles.heading)
+        }
+        hbox {
+            label("First Name: ")
+            textfield()
+        }
+        hbox {
+            label("Last Name: ")
+            textfield()
         }
     }
 }
