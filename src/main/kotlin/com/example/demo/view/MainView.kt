@@ -23,10 +23,13 @@ class MainView : View("Beaver Dam Model", icon = FX.icon) {
 }
 
 class LeftView: View() {
-    override val root  = stackpane {
-        setPrefSize(300.0, 200.0)
-        button("Open Editor").action {
-            find<Editor>().openModal(stageStyle = StageStyle.UTILITY)
+    override val root  = vbox {
+        setPrefSize(200.0, 200.0)
+        label("Edit Component Properties") {
+            addClass(Styles.heading)
+        }
+        button("Edit Dam Properties").action {
+            find<DamEditor>().openModal(stageStyle = StageStyle.UTILITY)
         }
     }
 }
@@ -54,28 +57,3 @@ class RightView: View() {
 class BottomView: View() {
     override val root = label("Bottom View")
 }
-
-class Editor: Fragment("Editor") {
-    override val root = form {
-        prefWidth = 300.0
-
-        fieldset("Editor") {
-            field("First field") {
-                textfield()
-            }
-            field("Second field") {
-                textfield()
-            }
-            button("Save") {
-                shortcut("Alt+S")
-                action {
-                    save()
-                }
-            }
-        }
-    }
-    private fun save() {
-        close()
-    }
-}
-
