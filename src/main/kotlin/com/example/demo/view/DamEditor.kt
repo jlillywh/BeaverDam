@@ -1,21 +1,15 @@
 package com.example.demo.view
 
 import com.example.demo.app.ElevationArea
+import com.example.demo.app.MyController
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
-import java.time.LocalDate
 
 class DamEditor : Fragment("Dam Editor") {
     val controller: DamController by inject()
     val input = SimpleStringProperty()
 
-    private val elevations = listOf(
-            ElevationArea(0.0, 0.0),
-            ElevationArea(1.0, 13.0),
-            ElevationArea(2.0, 18.0),
-            ElevationArea(3.0, 22.0),
-            ElevationArea(4.0, 30.0)
-    ).observable()
+    val elevationsController: MyController by inject()
 
     override val root = form {
         prefWidth = 300.0
@@ -27,10 +21,11 @@ class DamEditor : Fragment("Dam Editor") {
             field("Spillway Crest") {
                 textfield()
             }
-            tableview(elevations) {
-                readonlyColumn("Elevation",ElevationArea::elev)
-                readonlyColumn("Area", ElevationArea::area)
-                readonlyColumn("Volume", ElevationArea::volume)
+            tableview(elevationsController.elevations) {
+                isEditable = true
+                column("Elevation",ElevationArea::elev).makeEditable()
+                column("Area", ElevationArea::area).makeEditable()
+                column("Volume", ElevationArea::volume).makeEditable()
             }
             button("Save") {
                 shortcut("Alt+S")
