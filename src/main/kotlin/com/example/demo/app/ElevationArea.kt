@@ -2,11 +2,13 @@ package com.example.demo.app
 
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleDoubleProperty
+import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 import java.time.LocalDate
 import java.time.Period
 
 class ElevationArea(elev: Double, area: Double, volume: Double) {
+
     val elevProperty = SimpleDoubleProperty(elev)
     var elev by elevProperty
 

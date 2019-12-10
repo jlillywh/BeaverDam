@@ -1,10 +1,9 @@
 package com.example.demo.view
 
 import com.example.demo.app.Styles
-import javafx.scene.control.Label
-import javafx.scene.layout.BorderPane
 import javafx.stage.StageStyle
 import tornadofx.*
+import javafx.scene.control.TextField
 
 class MainView : View("Beaver Dam Model", icon = FX.icon) {
     val topView: TopView by inject()
@@ -28,25 +27,38 @@ class LeftView: View() {
         label("Edit Component Properties") {
             addClass(Styles.heading)
         }
-        button("Edit Dam Properties").action {
-            find<DamEditor>().openModal(stageStyle = StageStyle.UTILITY)
+        button("Elevation-Area-Volume").action {
+            find<ElevAreaVolume>().openModal(stageStyle = StageStyle.UTILITY)
         }
     }
 }
 
 class CenterView: View() {
+    var levelValue: TextField by singleAssign()
+    var level:String by property<String>("")
+    fun levelProperty() = getProperty(CenterView::level)
+
     override  val root  = vbox(1) {
         label("Reservoir Model") {
             addClass(Styles.heading)
         }
         hbox {
-            label("First Name: ")
-            textfield()
+            label("Initial Water Level: ")
+            levelValue = textfield()
+            //label("This is the result: , $level").bind(levelProperty())
         }
         hbox {
-            label("Last Name: ")
+            label("Spillway Crest Elevation: ")
             textfield()
         }
+        button("Update") {
+            useMaxWidth = true
+            action {
+                level = levelValue.text
+            }
+        }
+
+        label("$level").bind(levelProperty())
     }
 }
 
