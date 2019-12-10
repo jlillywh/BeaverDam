@@ -38,6 +38,10 @@ class CenterView: View() {
     var level:String by property<String>("")
     fun levelProperty() = getProperty(CenterView::level)
 
+    init {
+        level = "43.53"
+    }
+
     override  val root  = vbox(1) {
         label("Reservoir Model") {
             addClass(Styles.heading)
@@ -57,8 +61,11 @@ class CenterView: View() {
                 level = levelValue.text
             }
         }
-
-        label("$level").bind(levelProperty())
+        hbox {
+            label("Reservoir level: ")
+            label(level).bind(levelProperty())
+            label("ft")
+        }
     }
 }
 
